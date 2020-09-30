@@ -87,7 +87,6 @@ async function getAffiche(){
         content.querySelector(".caracteristique").innerText = `${film.Annee} / 1h45min / ${film.Genre}`;
         
         let acteur = acteurs.find(e => e.idActeur == film.Acteur);
-        console.log(acteur);
         content.querySelector(".acteurs").innerText = `${acteur.Nom}`;
 
         // let rect = content.getElementById("film5654");
