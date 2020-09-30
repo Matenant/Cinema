@@ -26,7 +26,7 @@ self.addEventListener('fetch', function(event) {
             }
             return fetch(event.request)
                 .then(function(response){
-                    returncaches.open(chacheName)
+                    return caches.open(cacheName)
                         .then(function(cache){
                             cache.put(event.request, response.clone());
                             return response;
