@@ -3,6 +3,7 @@
 <head>
     <meta name="description" content="Page de cinéma">
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#4285f4">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="liste.js"></script>
@@ -35,6 +36,20 @@
             </div>
         </div>
     </template>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+            navigator.serviceWorker.register('worker.js').then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="90" height="20">
         <defs>
