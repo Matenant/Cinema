@@ -60,7 +60,7 @@ async function getActeurs(){
         content.querySelector(".nom").innerText = acteur.Nom;
         
         content.querySelector(".photo > img").src = `https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs/${acteur.idActeur}.jpg`;
-        
+        content.querySelector(".photo > img").setAttribute("alt", acteur.Nom);
         document.body.appendChild(content);
     });
 }
@@ -81,7 +81,7 @@ async function getAffiche(){
         content.querySelector(".titre").innerText = film.Titre;
         
         content.querySelector(".affiche > img").src = `https://workshop.neotechweb.net/ws/ciamovie/1.0.0/films/${film.Fichier}`;
-        
+        content.querySelector(".affiche > img").setAttribute("alt", film.Fichier);
         content.querySelector(".real").innerText = `De ${film.Realisateur}`;
 
         content.querySelector(".caracteristique").innerText = `${film.Annee} / 1h45min / ${film.Genre}`;
