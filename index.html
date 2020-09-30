@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="liste.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <template id="templateActeur">
+        <div class="acteur">
+            <div class="photo"><img src="https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs/1.jpg"></div>
+            <div class="nom">Sylvester Stallone</div>
+            <div class="date"><img src="https://workshop.neotechweb.net/ws/flags/64/us.png"> 8 octobre 1949</div>
+            <div class="films"><span class="nombre">58</span> films</div>
+        </template>
+    </template>
+
+    <template id="templateAffiche">
+        <div class="film">
+            <div class="affiche"><img src="https://workshop.neotechweb.net/ws/ciamovie/1.0.0/films/temple_or.jpg"></div>
+            <div class="titre">Gremlins</div>
+            <div class="caracteristique">8 octobre 1949 / 1h45min / Comédie Fantastique</div>
+            <div class="real">De Joe Dante</div>
+            <div class="acteurs">Avec Zach Galligan</div>
+            <div class="boutons"><div class="bouton">Séances</div><div class="bouton">VOD</div></div>
+            <div class="etoiles">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="90" height="20">
+                    <use href="#stars"></use>
+                    <use href="#stars" fill="#fecc00" stroke="#fecc00" clip-path="url(#film5654)"></use>
+                </svg>
+            </div>
+        </div>
+    </template>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="90" height="20">
+        <defs>
+            <symbol id="star" viewBox="0 0 300 275">
+                <polygon stroke-width="10" points="150,25 179,111 269,111 197,165 223,251 150,200 77,251 103,165 31,111 121,111" />
+            </symbol>
+
+            <symbol id="stars">
+                <use href="#star" width="20" height="20" />
+                <use href="#star" x="18" width="20" height="20" />
+                <use href="#star" x="36" width="20" height="20" />
+                <use href="#star" x="54" width="20" height="20" />
+                <use href="#star" x="72" width="20" height="20" />
+            </symbol>
+
+            <clipPath id="film5654">
+                <rect height="20" width="50"></rect>
+            </clipPath>
+        </defs>
+    </svg>
+
+    <script>
+        //construction();
+        getActeurs();
+        getAffiche();
+    </script>
+</body>
+</html>
