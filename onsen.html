@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+        <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+        <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    </head>
+    <body>
+        <style>
+            .photo > img{
+                width: 80px;
+                border-radius: 100%;
+            }
+            .info > img {
+                height: 1rem;
+                vertical-align: text-bottom;
+            }
+            .nom{
+                font-weight: 600;
+                font-size: 1.25rem;
+            }
+            .film > .nombre{
+                display: inline-block;
+                background-color: #fecc00;
+                font-family: monospace;
+                border-radius: 50%;
+                font-weight: 600;
+                font-size: 0.846rem;
+                width: 1.82em;
+                line-height: 1.82em;
+                text-align: center;
+                color: #000;
+            }
+        </style>
+        <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+
+        <template id="page1.html">
+            <ons-page id="pageActeur">
+                <ons-toolbar>
+                    <div class="center">Cinéma</div>
+                </ons-toolbar>
+                <ons-page>
+                    <ons-list>
+                    </ons-list>
+                </ons-page>
+            </ons-page>
+        </template>
+
+        <template id="page2.html">
+            <ons-page id="pageFilm">
+                <ons-toolbar>
+                    <div class="left"><ons-back-button>Acteur</ons-back-button></div>
+                    <div class="center">Cinéma</div>
+                </ons-toolbar>
+                <ons-list>
+                    <ons-list-item>
+                        film 1
+                    </ons-list-item>
+                </ons-list>
+            </ons-page>
+        </template>
+
+        <template id="templateActeur">
+            <ons-list-item modifier="chevron" tappable class="acteur">
+                <div class="left">
+                    <img class=" photo list-item__thumbnail" src="https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs/1.jpg">
+                </div>
+                <div class="center">
+                    <span class="nom list-item__title">Sylvester Stallone</span>
+                    <span class="info list-item__subtitle"><img src="https://workshop.neotechweb.net/ws/flags/64/us.png" alt="drapeau"> 8 octobre 1949</span><br>
+                    <span class="film" data-count="58"><span class="nombre">58</span> films</span>
+                </div>
+            </ons-list-item>
+        </template>
+
+        <script>
+            document.addEventListener('init', function(event){
+                var page = event.target;
+                if(page.id == 'pageActeur'){
+                    getActeurs(page);
+                }
+                else if(page.id == 'pageFilm'){
+                    page.querySelector('ons-toolbar .center').innerHTML = page.data.Nom;
+                    getFilms(page.data.idActeur);
+                }
+            });
+
+            async function getActeurs(page){
+                let url = "https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs.php";
+                let data = await fetch(url);
+                let acteurs = await data.json();
+                
+                let template = document.getElementById("templateActeur");
+                let list = page.querySelector("ons-list");
+                acteurs.forEach(acteur => {
+                    let content = template.content.cloneNode(true);
+                    content.querySelector(".nom").innerText = acteur.Nom;
+                    content.querySelector(".photo").src = `https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs/${acteur.idActeur}.jpg`;
+
+                    content.firstElementChild.dataset.idActeur = acteur.idActeur;
+                    content.firstElementChild.dataset.Nom = acteur.Nom;
+                    
+                    content.firstElementChild.addEventListener("click", function(evt){
+                        console.log(event.currentTarget.parent);
+                        document.querySelector("#myNavigator").pushPage('page2.html', {
+                            data:{
+                                idActeur: event.currentTarget.dataset.idActeur,
+                                Nom: event.currentTarget.dataset.Nom
+                            }
+                        });
+                    });
+                    list.appendChild(content);
+                });
+            }
+
+            async function getFilms(idActeur){
+                //faire la fonction
+            }
+            
+        </script>
+
+    </body>
+</html>
